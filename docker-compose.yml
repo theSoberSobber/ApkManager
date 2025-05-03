@@ -2,13 +2,15 @@ version: '3.8'
 
 services:
   apkmanager:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.python
     ports:
-      - "8080:8080"
+      - "5000:5000"
     volumes:
-      - apk-storage:/app/apk-storage
+      - ./apk-storage:/app/apk-storage
     environment:
-      - SERVER_PORT=8080
+      - FLASK_APP=ApkManagerSimple.py
       - APK_STORAGE_LOCATION=/app/apk-storage
       # Change this to a secure key in production
       - API_SECRET_KEY=orvio-secret-key-change-in-production
